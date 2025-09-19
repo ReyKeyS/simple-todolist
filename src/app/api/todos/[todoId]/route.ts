@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { todoId: string } }
+    context: { params: Promise<{ todoId: string }> }
 ) {
     try {
         const session = await getServerSession(authOptions);
@@ -15,7 +15,8 @@ export async function PATCH(
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        const todoId = parseInt(params.todoId);
+        const resolvedParams = await context.params;
+        const todoId = parseInt(resolvedParams.todoId);
         const body = await request.json();
         const { title, description, priority, complete } = body;
 
@@ -41,7 +42,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { todoId: string } }
+    context: { params: Promise<{ todoId: string }> }
 ) {
     const session = await getServerSession(authOptions);
     if (!session || !session.user?.id) {
@@ -49,7 +50,8 @@ export async function DELETE(
     }
 
     try {
-        const todoId = parseInt(params.todoId);
+        const resolvedParams = await context.params;
+        const todoId = parseInt(resolvedParams.todoId);
 
         await prisma.todo.delete({
             where: {
