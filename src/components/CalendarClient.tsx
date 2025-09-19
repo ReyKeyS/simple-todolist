@@ -10,20 +10,17 @@ import { AddTodoDialog } from '@/components/AddTodoDialog'
 import { EditTodoDialog } from '@/components/EditTodoDialog';
 import { Priority } from '@prisma/client';
 
-// Setup Localizer
 const locales = { 'id-ID': id };
 const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales });
 
-// Definisikan Tipe
 interface Event {
   id?: number;
   title?: string | null;
   description?: string | null;
   start?: Date;
   end?: Date;
-  completed?: boolean;
+  complete?: boolean;
   priority?: Priority;
-  resource?: any;
 }
 interface CalendarClientProps {
   events: Event[];
@@ -64,8 +61,8 @@ export default function CalendarClient({ events }: CalendarClientProps) {
 
   const eventPropGetter = (event: Event) => {
     const style: React.CSSProperties = {};
-    const priority = event.resource?.priority;
-    const complete = event.resource?.complete;
+    const priority = event?.priority;
+    const complete = event?.complete;
 
     if (complete) {
       style.backgroundColor = '#22c55e';

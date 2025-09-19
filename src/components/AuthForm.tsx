@@ -47,7 +47,7 @@ export default function AuthForm() {
                     toast.error("Registration failed", { description: "Registration failed." });
                 }
             } catch (error) {
-                toast.error("Error", { description: "An error occurred." });
+                toast.error("Error, "+error, { description: "An error occurred." });
             }
         } else if (variant === 'LOGIN') {
             const result = await signIn('credentials', {

@@ -15,12 +15,6 @@ async function getTodos(userId: string) {
 
   return todos.map(todo => ({
     ...todo,
-    resource: {
-      id: todo.id,
-      description: todo.description,
-      priority: todo.priority,
-      complete: todo.complete,
-    },
     title: todo.title,
     start: todo.dueDate,
     end: new Date(todo.dueDate.getTime() + 60 * 60 * 1000),

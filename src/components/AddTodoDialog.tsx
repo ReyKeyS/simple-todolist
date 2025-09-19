@@ -56,7 +56,7 @@ export function AddTodoDialog({ isOpen, onOpenChange, selectedDate, onTodoAdded 
                 throw new Error('Failed to add To-Do.')
             }
         } catch (error) {
-            toast.error("Request Failed", { description: "Something went wrong. Please try again." });
+            toast.error("Request Failed, "+error, { description: "Something went wrong. Please try again." });
         } finally {
             setIsLoading(false);
         }

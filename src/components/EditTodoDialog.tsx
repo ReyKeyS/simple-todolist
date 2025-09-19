@@ -52,7 +52,7 @@ export function EditTodoDialog({ isOpen, onOpenChange, event, onTodoUpdated }: E
             toast.success("Task Updated", { description: "Your changes have been saved." });
             onTodoUpdated();
         } catch (error) {
-            toast.error("Update Failed", { description: "Failed to update the task." });
+            toast.error("Update Failed, "+error, { description: "Failed to update the task." });
         }
     };
 
@@ -65,7 +65,7 @@ export function EditTodoDialog({ isOpen, onOpenChange, event, onTodoUpdated }: E
             toast.success("Task Deleted", { description: "The task has been permanently removed." });
             onTodoUpdated();
         } catch (error) {
-            toast.error("Delete Failed", { description: "Failed to delete the task." });
+            toast.error("Delete Failed, "+error, { description: "Failed to delete the task." });
         }
     };
 
